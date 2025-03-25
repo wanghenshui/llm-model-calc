@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模型参数计算器</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>模型参数计算器</h1>
+        
+        <div class="calculator-container">
+            <div class="input-section">
+                <h2>输入 JSON 配置</h2>
+                <textarea id="json-input" placeholder="在此输入模型配置 JSON..."></textarea>
+                <div class="button-row">
+                    <button id="calculate-btn">计算</button>
+                    <button id="example-btn">加载示例</button>
+                </div>
+            </div>
+            
+            <div class="result-section">
+                <h2>计算结果</h2>
+                <div id="results-container">
+                    <div class="result-card">
+                        <h3>模型参数量</h3>
+                        <div id="total-params">--</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Prefill 阶段计算量</h3>
+                        <div id="prefill-flops">--</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>每 Token 解码计算量</h3>
+                        <div id="decode-flops">--</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>首 Token 生成时间 (TTFT)</h3>
+                        <div id="ttft">--</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>吞吐量 (Tokens/sec)</h3>
+                        <div id="throughput">--</div>
+                    </div>
+                </div>
+                
+                <div class="gpu-config">
+                    <h3>GPU 配置</h3>
+                    <div class="input-group">
+                        <label for="gpu-flops">GPU 计算能力 (TFLOPS):</label>
+                        <input type="number" id="gpu-flops" value="100">
+                    </div>
+                </div>
+                
+                <div id="error-message"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/calc.js"></script>
+</body>
+</html>
+
