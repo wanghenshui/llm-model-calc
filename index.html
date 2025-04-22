@@ -18,6 +18,14 @@
                     <button id="calculate-btn">计算</button>
                     <button id="example-btn">加载示例</button>
                 </div>
+                <div class="gpu-config">
+                    <h3>GPU 配置</h3>
+                    <div class="input-group">
+                        <label for="gpu-flops">GPU 计算能力 (TFLOPS):</label>
+                        <input type="number" id="gpu-flops" value="100">
+                    </div>
+                </div>
+                <div id="error-message"></div>
             </div>
             
             <div class="result-section">
@@ -58,15 +66,6 @@
                     </div>
                     </div>
                 </div>
-                
-                <div class="gpu-config">
-                    <h3>GPU 配置</h3>
-                    <div class="input-group">
-                        <label for="gpu-flops">GPU 计算能力 (TFLOPS):</label>
-                        <input type="number" id="gpu-flops" value="100">
-                    </div>
-                </div>
-                <div id="error-message"></div>
             </div>
         </div>
     </div>
