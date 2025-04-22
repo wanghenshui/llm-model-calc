@@ -23,6 +23,7 @@
             <div class="result-section">
                 <h2>计算结果</h2>
                 <div id="results-container">
+                    <div class="card-container">
                     <div class="result-card">
                         <h3>模型参数量</h3>
                         <div id="total-params">--</div>
@@ -31,6 +32,8 @@
                         <h3>Prefill 阶段计算量</h3>
                         <div id="prefill-flops">--</div>
                     </div>
+                    </div>
+                    <div class="card-container"></div>
                     <div class="result-card">
                         <h3>每 Token 解码计算量</h3>
                         <div id="decode-flops">--</div>
@@ -39,18 +42,20 @@
                         <h3>首 Token 生成时间 (TTFT)</h3>
                         <div id="ttft">--</div>
                     </div>
+                    </div>
                     <div class="result-card">
                         <h3>吞吐量 (Tokens/sec)</h3>
                         <div id="throughput">--</div>
                     </div>
+                    <div class="card-container">
                     <div class="result-card">
                         <h3>推理显存使用量</h3>
-                        <p id="inference-memory">-- GB</p>
+                        <div id="inference-memory">-- GB</div>
                     </div>
-                    
                     <div class="result-card">
                         <h3>训练显存使用量</h3>
-                        <p id="training-memory">-- GB</p>
+                        <div id="training-memory">-- GB</div>
+                    </div>
                     </div>
                 </div>
                 

@@ -78,6 +78,13 @@ button:hover {
     margin-top: 15px;
 }
 
+.card-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
 .result-card {
     background-color: #f7f7f7;
     border-radius: 6px;
