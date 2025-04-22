@@ -43,6 +43,15 @@
                         <h3>吞吐量 (Tokens/sec)</h3>
                         <div id="throughput">--</div>
                     </div>
+                    <div class="result-card">
+                        <h3>推理显存使用量</h3>
+                        <p id="inference-memory">-- GB</p>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>训练显存使用量</h3>
+                        <p id="training-memory">-- GB</p>
+                    </div>
                 </div>
                 
                 <div class="gpu-config">
@@ -52,7 +61,6 @@
                         <input type="number" id="gpu-flops" value="100">
                     </div>
                 </div>
-                
                 <div id="error-message"></div>
             </div>
         </div>

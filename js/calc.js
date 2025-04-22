@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const throughputEl = document.getElementById('throughput');
     const gpuFlopsInput = document.getElementById('gpu-flops');
     const errorMessage = document.getElementById('error-message');
-    
+    const inferenceMemoryOutput = document.getElementById('inference-memory');
+    const trainingMemoryOutput = document.getElementById('training-memory');
     // 示例配置
     const exampleConfig = {
         "attention_dropout": 0.0,
@@ -61,7 +62,14 @@ document.addEventListener('DOMContentLoaded', function() {
             // 计算总参数量
             const totalParams = calculateTotalParameters(config);
             totalParamsEl.textContent = `${totalParams.toFixed(2)} B`;
+            const dtypeSize = getDtypeSize(config);
+            // 计算显存使用
+            const inferenceMemory = totalParams * dtypeSize;
+            const trainingMemory = inferenceMemory * 4;
             
+            // 更新UI
+            inferenceMemoryOutput.textContent = `${inferenceMemory.toFixed(2)} GB`;
+            trainingMemoryOutput.textContent = `${trainingMemory.toFixed(2)} GB`;
             // 计算prefill阶段FLOPS
             const prefillFlops = calculatePrefillingFLOPs(config);
             prefillFlopsEl.textContent = `${prefillFlops.toFixed(2)} TFLOPs`;
@@ -171,5 +179,35 @@ document.addEventListener('DOMContentLoaded', function() {
         
         return totalFlops / 1e12; // 转换为TFLOPS
     }
-});
 
+    function extractDtype(config) {
+        if (config.torch_dtype) {
+            return config.torch_dtype;
+        } else if (config.dtype) {
+            return config.dtype;
+        }
+        
+        return null;
+    }
+    
+    function getDtypeSize(config) {
+        // 将dtype字符串转为小写便于比较
+        dtype = extractDtype(config);
+        dtype = dtype.toLowerCase();
+        
+        if (dtype.includes('float16') || dtype.includes('fp16') || dtype.includes('half') || dtype.includes('bfloat16') || dtype.includes('bf16')) {
+            return 2; // 2字节
+        } else if (dtype.includes('float32') || dtype.includes('fp32') || dtype.includes('float')) {
+            return 4; // 4字节
+        } else if (dtype.includes('float64') || dtype.includes('fp64') || dtype.includes('double')) {
+            return 8; // 8字节
+        } else if (dtype.includes('int8') || dtype.includes('uint8')) {
+            return 1; // 1字节
+        } else if (dtype.includes('int4') || dtype.includes('uint4') || dtype.includes('nf4')) {
+            return 0.5; // 0.5字节
+        }
+        
+        // 默认返回fp32大小
+        return 4;
+    }
+});
